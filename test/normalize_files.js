@@ -23,7 +23,13 @@ test('normalize_files', function (t) {
     {src: ['src'], dest: 'destOne'},
     {src: ['src2'], dest: 'destTwo'}
   ];
-  t.deepEqual(normalizeFiles(input), expected, 'should extract array files form');
+  t.deepEqual(normalizeFiles(input), expected, 'should extract files array expanded form');
+
+  input = {
+    files: ['src']
+  };
+  expected = input;
+  t.deepEqual(normalizeFiles(input), expected, 'should extract files source array form');
 
   input = {
     files: {
@@ -33,14 +39,6 @@ test('normalize_files', function (t) {
   };
   expected = input.files;
   t.deepEqual(normalizeFiles(input), expected, 'should extract files object form');
-
-  input = {
-    files: [
-      {src: 'src', dest: 'dest'}
-    ]
-  };
-  expected = input.files;
-  t.deepEqual(normalizeFiles(input), expected, 'should extract files array form');
 
   t.end();
 });
