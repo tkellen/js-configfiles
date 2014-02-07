@@ -1,7 +1,7 @@
 {
   "name": "configfiles",
   "description": "Get files from a configuration using globule.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "homepage": "https://github.com/tkellen/node-configfiles",
   "author": {
     "name": "Tyler Kellen",
