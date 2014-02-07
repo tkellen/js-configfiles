@@ -1,0 +1,45 @@
+{
+  "name": "configfiles",
+  "description": "Get files from a configuration using globule.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/tkellen/node-configfiles",
+  "author": {
+    "name": "Tyler Kellen",
+    "url": "http://goingslowly.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tkellen/node-configfiles.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tkellen/node-configfiles/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/tkellen/node-configfiles/blob/master/LICENSE"
+    }
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "tap ./test/*.js"
+  },
+  "dependencies": {
+    "globule": "~0.2.0",
+    "clone": "~0.1.11"
+  },
+  "keywords": [
+    "glob",
+    "file",
+    "match",
+    "mapping",
+    "expand",
+    "wildcard",
+    "pattern",
+    "sync",
+    "awesome"
+  ]
+}
