@@ -31,5 +31,14 @@ test('expand', function (t) {
     {src: ['fixtures/foo.txt'], dest: 'dest/fixtures/foo.txt'}
   ]);
 
+  t.deepEqual(expand({src:['fixtures/*']}), {
+    src: ['fixtures/1.js',
+          'fixtures/2.js',
+          'fixtures/3.js',
+          'fixtures/bar.txt',
+          'fixtures/baz.txt',
+          'fixtures/foo.txt']
+  });
+
   t.end();
 });

@@ -6,6 +6,7 @@ module.exports = function (input) {
   if (Array.isArray(files)) {
     return files.map(expand);
   } else {
-    return [expand(files)];
+    var output = expand(files);
+    return Array.isArray(output) ? output : [output];
   }
 };

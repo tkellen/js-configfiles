@@ -28,7 +28,7 @@ test('normalize_files', function (t) {
   input = {
     files: ['src']
   };
-  expected = input;
+  expected = {src:['src']};
   t.deepEqual(normalizeFiles(input), expected, 'should extract files source array form');
 
   input = {

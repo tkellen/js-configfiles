@@ -61,6 +61,14 @@ configfiles({
 //        'test/fixtures/foo.txt' ] } ]
 
 configfiles({
+  files: ['test/fixtures/*.js']
+});
+// [ { src:
+//      [ 'test/fixtures/1.js',
+//        'test/fixtures/2.js',
+//        'test/fixtures/3.js' ] } ]
+
+configfiles({
   expand: true,
   cwd: 'test/fixtures',
   src: '*.js',
