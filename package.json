@@ -41,5 +41,8 @@
     "pattern",
     "sync",
     "awesome"
-  ]
+  ],
+  "devDependencies": {
+    "tap": "~0.4.8"
+  }
 }
