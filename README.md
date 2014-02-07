@@ -63,7 +63,7 @@ configfiles({
 configfiles({
   expand: true,
   cwd: 'test/fixtures',
-  src: ['*.js'],
+  src: '*.js',
   dest: 'dest/'
 });
 // [ [ { src: [Object], dest: 'dest/1.js' },

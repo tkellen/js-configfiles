@@ -6,6 +6,6 @@ module.exports = function (input) {
   if (Array.isArray(files)) {
     return files.map(expand);
   } else {
-    return expand(files);
+    return [expand(files)];
   }
 };

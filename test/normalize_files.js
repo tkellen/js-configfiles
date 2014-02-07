@@ -10,7 +10,7 @@ test('normalize_files', function (t) {
     dest: 'dest',
     key: true
   };
-  expected = [input];
+  expected = input;
   t.deepEqual(normalizeFiles(input), expected, 'should extract single src/dest form');
 
   input = {
@@ -31,7 +31,7 @@ test('normalize_files', function (t) {
       dest: 'dest'
     }
   };
-  expected = [input.files];
+  expected = input.files;
   t.deepEqual(normalizeFiles(input), expected, 'should extract files object form');
 
   input = {
