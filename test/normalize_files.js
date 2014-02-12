@@ -40,5 +40,9 @@ test('normalize_files', function (t) {
   expected = input.files;
   t.deepEqual(normalizeFiles(input), expected, 'should extract files object form');
 
+  input = ['src'];
+  expected = {src:input};
+  t.deepEqual(normalizeFiles(input), expected, 'should extract plain array form');
+
   t.end();
 });
