@@ -1,44 +1,46 @@
-const test = require('tap').test;
+const expect = require('chai').expect;
 const expand = require('../lib/expand');
 
-test('expand', function (t) {
+describe('expand', function () {
 
-  t.deepEqual(expand({src:'fixtures/*'}), {
-    src: ['fixtures/1.js',
-          'fixtures/2.js',
-          'fixtures/3.js',
-          'fixtures/bar.txt',
-          'fixtures/baz.txt',
-          'fixtures/foo.txt']
+  it('expand requests using globule', function () {
+    expect(expand({src:'test/fixtures/*'})).to.deep.equal({
+      src: ['test/fixtures/1.js',
+            'test/fixtures/2.js',
+            'test/fixtures/3.js',
+            'test/fixtures/bar.txt',
+            'test/fixtures/baz.txt',
+            'test/fixtures/foo.txt']
+    });
+
+    expect(expand({src:'test/fixtures/*',dest:'dest'})).to.deep.equal({
+      src: ['test/fixtures/1.js',
+            'test/fixtures/2.js',
+            'test/fixtures/3.js',
+            'test/fixtures/bar.txt',
+            'test/fixtures/baz.txt',
+            'test/fixtures/foo.txt'],
+      dest: 'dest'
+    });
+
+    expect(expand({src:'test/fixtures/*',dest:'dest/',expand:true})).to.deep.equal([
+      {src: ['test/fixtures/1.js'], dest: 'dest/test/fixtures/1.js'},
+      {src: ['test/fixtures/2.js'], dest: 'dest/test/fixtures/2.js'},
+      {src: ['test/fixtures/3.js'], dest: 'dest/test/fixtures/3.js'},
+      {src: ['test/fixtures/bar.txt'], dest: 'dest/test/fixtures/bar.txt'},
+      {src: ['test/fixtures/baz.txt'], dest: 'dest/test/fixtures/baz.txt'},
+      {src: ['test/fixtures/foo.txt'], dest: 'dest/test/fixtures/foo.txt'}
+    ]);
+
+    expect(expand({src:['test/fixtures/*']})).to.deep.equal({
+      src: ['test/fixtures/1.js',
+            'test/fixtures/2.js',
+            'test/fixtures/3.js',
+            'test/fixtures/bar.txt',
+            'test/fixtures/baz.txt',
+            'test/fixtures/foo.txt']
+    });
+
   });
-
-  t.deepEqual(expand({src:'fixtures/*',dest:'dest'}), {
-    src: ['fixtures/1.js',
-          'fixtures/2.js',
-          'fixtures/3.js',
-          'fixtures/bar.txt',
-          'fixtures/baz.txt',
-          'fixtures/foo.txt'],
-    dest: 'dest'
-  });
-
-  t.deepEqual(expand({src:'fixtures/*',dest:'dest/',expand:true}), [
-    {src: ['fixtures/1.js'], dest: 'dest/fixtures/1.js'},
-    {src: ['fixtures/2.js'], dest: 'dest/fixtures/2.js'},
-    {src: ['fixtures/3.js'], dest: 'dest/fixtures/3.js'},
-    {src: ['fixtures/bar.txt'], dest: 'dest/fixtures/bar.txt'},
-    {src: ['fixtures/baz.txt'], dest: 'dest/fixtures/baz.txt'},
-    {src: ['fixtures/foo.txt'], dest: 'dest/fixtures/foo.txt'}
-  ]);
-
-  t.deepEqual(expand({src:['fixtures/*']}), {
-    src: ['fixtures/1.js',
-          'fixtures/2.js',
-          'fixtures/3.js',
-          'fixtures/bar.txt',
-          'fixtures/baz.txt',
-          'fixtures/foo.txt']
-  });
-
-  t.end();
 });
+

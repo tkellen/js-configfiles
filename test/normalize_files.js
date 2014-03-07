@@ -1,48 +1,71 @@
-const test = require('tap').test;
+const expect = require('chai').expect;
 const normalizeFiles = require('../lib/normalize_files');
 
-test('normalize_files', function (t) {
+describe('normalizeFiles', function () {
 
-  var input, expected;
+  it('should extract single src/dest form', function () {
+    var input = {
+      src: ['src'],
+      dest: 'dest',
+      key: true
+    };
+    var expected = input;
+    expect(normalizeFiles(input)).to.deep.equal(expected);
+  });
 
-  input = {
-    src: ['src'],
-    dest: 'dest',
-    key: true
-  };
-  expected = input;
-  t.deepEqual(normalizeFiles(input), expected, 'should extract single src/dest form');
+  it('should extract files array expanded form', function () {
+    var input = {
+      files: {
+        destOne: ['src'],
+        destTwo: ['src2']
+      }
+    };
+    var expected = [
+      {src: ['src'], dest: 'destOne'},
+      {src: ['src2'], dest: 'destTwo'}
+    ];
+    expect(normalizeFiles(input)).to.deep.equal(expected);
+  });
 
-  input = {
-    files: {
-      destOne: ['src'],
-      destTwo: ['src2']
-    }
-  };
-  expected = [
-    {src: ['src'], dest: 'destOne'},
-    {src: ['src2'], dest: 'destTwo'}
-  ];
-  t.deepEqual(normalizeFiles(input), expected, 'should extract files array expanded form');
 
-  input = {
-    files: ['src']
-  };
-  expected = {src:['src']};
-  t.deepEqual(normalizeFiles(input), expected, 'should extract files source array form');
+  it('should extract files source array form', function () {
+    var input = {
+      files: ['src']
+    };
+    var expected = {src:['src']};
+    expect(normalizeFiles(input)).to.deep.equal(expected);
+  });
 
-  input = {
-    files: {
-      src: 'src',
-      dest: 'dest'
-    }
-  };
-  expected = input.files;
-  t.deepEqual(normalizeFiles(input), expected, 'should extract files object form');
+  it('should extract files object form', function () {
+    var input = {
+      files: {
+        src: 'src',
+        dest: 'dest'
+      }
+    };
+    var expected = input.files;
+    expect(normalizeFiles(input)).to.deep.equal(expected);
+  });
 
-  input = ['src'];
-  expected = {src:input};
-  t.deepEqual(normalizeFiles(input), expected, 'should extract plain array form');
+  it('should extract plain array form', function () {
+    var input = ['src'];
+    var expected = {src:input};
+    expect(normalizeFiles(input)).to.deep.equal(expected);
+  });
 
-  t.end();
+  it('should flatten nested array form', function () {
+    var input = {
+      files: [
+        [{src: 'one'}],
+        [{src: 'two'},{src: 'three'}]
+      ]
+    };
+    var expected = [
+      {src: 'one'},
+      {src: 'two'},
+      {src: 'three'}
+    ];
+    expect(normalizeFiles(input)).to.deep.equal(expected);
+  });
+
 });

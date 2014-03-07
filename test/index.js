@@ -1,23 +1,40 @@
-const test = require('tap').test;
+const expect = require('chai').expect;
 const configfiles = require('../');
 
-test('configfiles', function (t) {
+describe('configfiles', function () {
 
-  t.deepEqual(configfiles({
-    src: 'fixtures/*',
-    dest: 'dest',
-    options: {
-      key: 'value'
-    }
-  }), [{
-    src: ['fixtures/1.js',
-          'fixtures/2.js',
-          'fixtures/3.js',
-          'fixtures/bar.txt',
-          'fixtures/baz.txt',
-          'fixtures/foo.txt'],
-    dest: 'dest'
-  }], 'creates a files object from a task declaration');
+  it('should create a files object from a task declaration', function () {
+    expect(configfiles({
+      src: 'test/fixtures/*',
+      dest: 'dest',
+      options: {
+        key: 'value'
+      }
+    })).to.deep.equal([{
+      src: ['test/fixtures/1.js',
+            'test/fixtures/2.js',
+            'test/fixtures/3.js',
+            'test/fixtures/bar.txt',
+            'test/fixtures/baz.txt',
+            'test/fixtures/foo.txt'],
+      dest: 'dest'
+    }]);
 
-  t.end();
+    expect(configfiles({
+      src: 'test/fixtures/*',
+      dest: 'dest',
+      options: {
+        key: 'value'
+      }
+    })).to.deep.equal([{
+      src: ['test/fixtures/1.js',
+            'test/fixtures/2.js',
+            'test/fixtures/3.js',
+            'test/fixtures/bar.txt',
+            'test/fixtures/baz.txt',
+            'test/fixtures/foo.txt'],
+      dest: 'dest'
+    }]);
+  });
+
 });
